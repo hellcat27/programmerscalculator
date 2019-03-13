@@ -9,6 +9,7 @@ def main_menu():
     print("Main menu")
     print("1. Convert hex string to binary")
     print("2. Convert binary string to hex")
+    print("3. Quit")
     print("")
 
     choice = input(">")
@@ -42,15 +43,39 @@ def convertToBinary(x):
         menu_actions['main_menu']()
 
 def convertToHex(x):
+    convertedString = ''
+    convertedPortion = ''
+    i = 0
+    length = len(x)
+    try:
+        while(i < length):
+            convertedPortion = x[i:(i+4)]
+            convertedString += binaryLookup.get(convertedPortion)
+            i += 4
+        print(convertedString)
+        input("")
+        menu_actions['main_menu']()
+    except TypeError:
+        print("Invalid binary code.")
+        input("")
+        menu_actions['main_menu']()
+
+            
+
     print("")
 
-
+def programQuit():
+    sys.exit()
 
 def ctbMenu():
     hexInput = input("Enter the hexadecimal string to convert: ")
     convertToBinary(hexInput)
 
-menu_actions = {'main_menu': main_menu,'1': ctbMenu}
+def cthMenu():
+    binInput = input("Enter the binary string to convert: ")
+    convertToHex(binInput)
+
+menu_actions = {'main_menu': main_menu,'1': ctbMenu, '2': cthMenu, '3': programQuit}
 
 if __name__ == "__main__":
     main_menu()
